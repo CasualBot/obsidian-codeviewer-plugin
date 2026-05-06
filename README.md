@@ -1,6 +1,8 @@
 # Code View
 
-Obsidian plugin that opens source files (`py`, `ps1`, `sh`, `ts`, `cs`, `sql`, `yml`, etc.) inside Obsidian with Prism syntax highlighting. Read-only — never executes file contents.
+Obsidian plugin that provides **read-only** syntax-highlighted viewing for the most common development and developer-centric file types — `py`, `ps1`, `sh`, `ts`, `cs`, `sql`, `yml`, and many more. Never executes file contents.
+
+The goal is to make developer files first-class citizens inside an Obsidian vault. A common use case is storing AI agent harness files — prompts, tool configs, `CLAUDE.md` instructions, memory files, and similar artifacts — directly in your vault so they're browsable, searchable, and linkable alongside your notes. Any plain-text source file you'd normally only open in an editor can instead be read from within Obsidian without leaving your knowledge base.
 
 End users install through Obsidian's **Settings → Community plugins → Browse**, or download the artifacts from the [latest GitHub release](https://github.com/CasualBot/obsidian-codeviewer-plugin/releases/latest).
 
