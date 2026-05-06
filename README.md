@@ -40,3 +40,18 @@ This copies `manifest.json`, `main.js`, and `styles.css` to `<vault>/.obsidian/p
 Releases are produced exclusively by the **Release Obsidian plugin** workflow (Actions tab → Run workflow → choose `patch | minor | major`). The workflow bumps the version, syncs `manifest.json` + `versions.json` via the `version` lifecycle hook, builds, tags (no `v` prefix — Obsidian rejects it), and publishes a GitHub release with `main.js` + `manifest.json` + `styles.css` attached.
 
 Never edit the version in `manifest.json`, `versions.json`, or `package.json` by hand — always go through `npm version` (or the workflow).
+
+---
+
+## Obsidian developer policy compliance
+
+This plugin complies with all [Obsidian developer policies](https://docs.obsidian.md/Developer+policies):
+
+- **No network use.** The plugin operates entirely offline. No data leaves the device.
+- **No telemetry.** No client-side or server-side analytics of any kind.
+- **No payment or account required.** Fully free and open source under the MIT license.
+- **No ads.** No banners, pop-ups, or any promotional content.
+- **No obfuscation.** Source is published in full.
+- **No self-update mechanism.** Updates are distributed exclusively through the Obsidian community plugin directory and GitHub releases.
+- **License file included.** See [`LICENSE`](./LICENSE) (MIT).
+- **Third-party attribution.** Syntax highlighting is provided by [Prism.js](https://prismjs.com/) (MIT License, Copyright © 2012 Lea Verou), bundled in `main.js` per its license terms.
