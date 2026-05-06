@@ -1,7 +1,7 @@
 {
   "id": "code-view",
   "name": "Code View",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "minAppVersion": "1.4.0",
   "description": "View source code files (py, ps1, sh, ts, etc.) inside Obsidian with syntax highlighting via Prism.",
   "author": "CasualBot",
