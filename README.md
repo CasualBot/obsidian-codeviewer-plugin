@@ -10,20 +10,30 @@ This plugin was built for people who want a code viewer in Obsidian but cannot o
 
 ## Install
 
+### From a GitHub release
+
+Recommended for everyday use — no toolchain required.
+
+1. Open the [latest release](https://github.com/CasualBot/obsidian-codeviewer-plugin/releases/latest) and download `main.js`, `manifest.json`, and `styles.css`.
+2. Create the folder `<vault>/.obsidian/plugins/code-view/` and drop the three files into it.
+3. Continue to [Enable in Obsidian](#enable-in-obsidian) below.
+
+Each release is built and published by a GitHub Actions workflow that the repo owner triggers manually with a `patch | minor | major` choice. The released artifacts are exactly what's produced by `npm run build` against the tagged commit — the same code as the source, no extra steps.
+
 ### From source
 
-Requires Node.js 20+.
+For people who want to build the artifact themselves and audit it before installing. Requires Node.js 20+.
 
 ```bash
-git clone https://github.com/ShawnAtActivate/obisidian-codeview-plugin.git
-cd obisidian-codeview-plugin
+git clone https://github.com/CasualBot/obsidian-codeviewer-plugin.git
+cd obsidian-codeviewer-plugin
 npm install
 npm run build
 ```
 
 This produces `main.js`, `manifest.json`, and `styles.css` at the project root.
 
-### Copy into a vault
+#### Copy into a vault
 
 Use the bundled installer — point `VAULT_PATH` at your vault's root directory:
 

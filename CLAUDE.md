@@ -9,9 +9,12 @@ npm run build                                      # production bundle → main.
 npm run dev                                        # esbuild watch mode (inline sourcemaps)
 npm run typecheck                                  # tsc --noEmit, strict
 VAULT_PATH="/path/to/vault" npm run install-to-vault   # copy manifest.json/main.js/styles.css to <vault>/.obsidian/plugins/code-view/
+npm version <patch|minor|major>                    # bump package.json + manifest.json + versions.json, commit, tag (no `v` prefix)
 ```
 
 There is no test suite and no linter wired up. Type errors are the only static check — run `npm run typecheck` before considering work done.
+
+`npm version` runs `scripts/version-bump.mts` automatically via the `version` lifecycle hook — it reads the new version from `npm_package_version`, writes it into `manifest.json`, appends an entry to `versions.json` keyed by the new version with the manifest's current `minAppVersion`, then `git add`s both. The plain (no `v`) tag prefix is enforced by `config.tag-version-prefix: ""` in `package.json`, which is what Obsidian's release tooling requires.
 
 ## Commits & Branches
 
@@ -20,6 +23,26 @@ There is no test suite and no linter wired up. Type errors are the only static c
 - Do not add `Co-Authored-By` trailers to commit messages.
 
 After installing into a vault, Obsidian must **Reload plugins** (or Ctrl+R) to pick up changes. Settings changes that touch the extension list also require a full Obsidian reload — see "Extension registration" below.
+
+## Releasing
+
+Releases are produced exclusively by the `Release Obsidian plugin` workflow in `.github/workflows/release.yml`. The workflow is `workflow_dispatch`-only (no push triggers, no scheduled triggers) and gated by `if: github.actor == 'CasualBot'` — only the repo owner can fire it.
+
+Flow when **Run workflow** is clicked from the GitHub Actions tab with a `patch | minor | major` choice:
+
+1. `npm ci` + `npm run typecheck`.
+2. Configure git as `github-actions[bot]`.
+3. `npm version <bump>` — bumps `package.json`, runs the `version` script (`scripts/version-bump.mts`) which syncs `manifest.json` + `versions.json`, then commits everything and creates a plain `<version>` git tag.
+4. `npm run build` — produces `main.js`.
+5. `git push --follow-tags` — pushes both the bump commit and the tag to `main`.
+6. `gh release create "$tag" --generate-notes main.js manifest.json styles.css` — publishes a GitHub release named after the tag with auto-generated notes from the commit log since the previous tag, with the three Obsidian-required artifacts attached.
+
+Two version-numbering rules to keep in mind:
+
+- **No `v` prefix on tags.** Obsidian rejects `v1.0.0`-style tags. The `config.tag-version-prefix: ""` block in `package.json` is what enforces this for `npm version`.
+- **`manifest.json`, `versions.json`, and the git tag must agree exactly.** The `version` lifecycle hook is what guarantees this — never edit the version in any of those files by hand. Always go through `npm version` (or the workflow, which is the same command).
+
+`gh` is pre-installed and pre-authenticated on GitHub-hosted runners when `GITHUB_TOKEN` is exposed; the workflow declares `permissions: contents: write` at the job level, which is what `gh release create` needs to push the tag and upload assets.
 
 ## Architecture
 
