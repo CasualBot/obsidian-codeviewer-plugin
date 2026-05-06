@@ -1,0 +1,146 @@
+.code-view-container {
+  height: 100%;
+  overflow: auto;
+  padding: 12px 16px;
+  font-family: var(--font-monospace);
+  font-size: var(--code-size, 13px);
+  line-height: 1.5;
+  background: var(--background-primary);
+  color: var(--text-normal);
+}
+
+.code-view-wrap {
+  display: flex;
+  align-items: flex-start;
+  min-width: max-content;
+}
+
+.code-view-gutter {
+  user-select: none;
+  flex: 0 0 auto;
+  text-align: right;
+  padding-right: 12px;
+  margin-right: 12px;
+  border-right: 1px solid var(--background-modifier-border);
+  color: var(--text-faint);
+}
+
+.code-view-gutter > div {
+  font-variant-numeric: tabular-nums;
+  white-space: pre;
+}
+
+.code-view-container pre {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  white-space: pre;
+  flex: 1 1 auto;
+}
+
+.code-view-container pre code {
+  background: transparent;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: pre;
+}
+
+.code-view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  font-size: 0.85em;
+  color: var(--text-muted);
+  background: var(--background-secondary);
+}
+
+.code-view-header .code-view-lang {
+  font-family: var(--font-monospace);
+  text-transform: lowercase;
+}
+
+.code-view-readonly-badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--background-modifier-border);
+  color: var(--text-muted);
+  font-size: 0.85em;
+}
+
+/* Prism token colors — mapped to Obsidian's code variables with sensible fallbacks */
+.code-view-container .token.comment,
+.code-view-container .token.prolog,
+.code-view-container .token.doctype,
+.code-view-container .token.cdata {
+  color: var(--code-comment, #7f848e);
+  font-style: italic;
+}
+
+.code-view-container .token.punctuation {
+  color: var(--code-punctuation, #abb2bf);
+}
+
+.code-view-container .token.namespace {
+  opacity: 0.7;
+}
+
+.code-view-container .token.property,
+.code-view-container .token.tag,
+.code-view-container .token.boolean,
+.code-view-container .token.number,
+.code-view-container .token.constant,
+.code-view-container .token.symbol,
+.code-view-container .token.deleted {
+  color: var(--code-value, #d19a66);
+}
+
+.code-view-container .token.selector,
+.code-view-container .token.attr-name,
+.code-view-container .token.string,
+.code-view-container .token.char,
+.code-view-container .token.builtin,
+.code-view-container .token.inserted {
+  color: var(--code-string, #98c379);
+}
+
+.code-view-container .token.operator,
+.code-view-container .token.entity,
+.code-view-container .token.url,
+.code-view-container .language-css .token.string,
+.code-view-container .style .token.string {
+  color: var(--code-operator, var(--code-normal, #56b6c2));
+}
+
+.code-view-container .token.atrule,
+.code-view-container .token.attr-value,
+.code-view-container .token.keyword {
+  color: var(--code-keyword, #c678dd);
+}
+
+.code-view-container .token.function,
+.code-view-container .token.class-name {
+  color: var(--code-function, #61afef);
+}
+
+.code-view-container .token.regex,
+.code-view-container .token.important,
+.code-view-container .token.variable {
+  color: var(--code-important, #e06c75);
+}
+
+.code-view-container .token.important,
+.code-view-container .token.bold {
+  font-weight: bold;
+}
+
+.code-view-container .token.italic {
+  font-style: italic;
+}
+
+.code-view-container .token.entity {
+  cursor: help;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "obsidian-codeview-plugin",
+  "version": "0.1.0",
+  "description": "Obsidian plugin to view source files with syntax highlighting.",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsx esbuild.config.mts production",
+    "dev": "tsx esbuild.config.mts",
+    "install-to-vault": "tsx scripts/install-to-vault.mts"
+  },
+  "dependencies": {
+    "prismjs": "^1.29.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/prismjs": "^1.26.3",
+    "esbuild": "^0.25.0",
+    "obsidian": "^1.5.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.4.2"
+  }
+}
