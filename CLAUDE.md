@@ -13,9 +13,11 @@ VAULT_PATH="/path/to/vault" npm run install-to-vault   # copy manifest.json/main
 
 There is no test suite and no linter wired up. Type errors are the only static check — run `npm run typecheck` before considering work done.
 
-## Commits
+## Commits & Branches
 
-Do not add `Co-Authored-By` trailers to commit messages.
+- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) — `type(scope): description` (e.g. `feat(prism): add zig grammar`, `fix(view): handle empty file render`).
+- Branch names follow conventional branching — `type/short-description` (e.g. `feat/zig-grammar`, `fix/empty-file-render`, `chore/bump-prism`).
+- Do not add `Co-Authored-By` trailers to commit messages.
 
 After installing into a vault, Obsidian must **Reload plugins** (or Ctrl+R) to pick up changes. Settings changes that touch the extension list also require a full Obsidian reload — see "Extension registration" below.
 

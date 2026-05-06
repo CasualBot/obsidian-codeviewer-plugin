@@ -2,6 +2,12 @@
 
 Obsidian plugin that opens source files (`py`, `ps1`, `sh`, `ts`, `cs`, `sql`, `yml`, etc.) directly inside Obsidian with Prism syntax highlighting.
 
+## Why this exists
+
+This plugin was built for people who want a code viewer in Obsidian but cannot or will not trust community plugins they haven't read end-to-end. The repo is small enough to audit in a single sitting, self-hostable, and installs by copying three files into your vault — no marketplace, no auto-updates, no opaque dependencies beyond Prism.
+
+**All rendering is read-only.** Files are loaded as text, tokenized by Prism, and inserted into the DOM as syntax-highlighted markup. The plugin never executes the file contents — opening a `.ps1`, `.sh`, `.py`, or any other extension does not run it. There is no `eval`, no shell-out, no process spawn, and no network call in the rendering path.
+
 ## Install
 
 ### From source
