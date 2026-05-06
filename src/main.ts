@@ -7,6 +7,7 @@ import {
   WorkspaceLeaf,
   Notice,
 } from "obsidian";
+import type { Token } from "prismjs";
 import Prism from "./prism";
 
 interface CodeViewSettings {
@@ -102,6 +103,29 @@ function parseExtensions(raw: string): string[] {
   return out;
 }
 
+// Build DOM nodes directly from Prism's token stream so we never assign HTML
+// strings to innerHTML — Obsidian's plugin guidelines forbid it.
+function renderTokens(parent: HTMLElement, tokens: Array<string | Token>): void {
+  for (const token of tokens) {
+    if (typeof token === "string") {
+      parent.appendText(token);
+      continue;
+    }
+    const aliasPart = token.alias
+      ? ` ${Array.isArray(token.alias) ? token.alias.join(" ") : token.alias}`
+      : "";
+    const span = parent.createSpan({ cls: `token ${token.type}${aliasPart}` });
+    const content = token.content;
+    if (typeof content === "string") {
+      span.appendText(content);
+    } else if (Array.isArray(content)) {
+      renderTokens(span, content);
+    } else {
+      renderTokens(span, [content]);
+    }
+  }
+}
+
 class CodeView extends TextFileView {
   private codeRoot: HTMLElement | null = null;
   private headerEl: HTMLElement | null = null;
@@ -189,13 +213,13 @@ class CodeView extends TextFileView {
     const grammar = Prism.languages[lang];
     if (grammar) {
       try {
-        code.innerHTML = Prism.highlight(this.data, grammar, lang);
+        renderTokens(code, Prism.tokenize(this.data, grammar));
       } catch {
-        console.warn(`[code-view] Prism highlighting failed for ${lang}`);
-        code.textContent = this.data;
+        code.empty();
+        code.setText(this.data);
       }
     } else {
-      code.textContent = this.data;
+      code.setText(this.data);
     }
   }
 }
