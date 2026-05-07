@@ -162,12 +162,13 @@ class CodeView extends TextFileView {
     if (this.codeRoot) this.codeRoot.empty();
   }
 
-  async onOpen(): Promise<void> {
+  onOpen(): Promise<void> {
     this.contentEl.empty();
     this.contentEl.addClass("code-view-host");
 
     this.headerEl = this.contentEl.createDiv({ cls: "code-view-header" });
     this.codeRoot = this.contentEl.createDiv({ cls: "code-view-container" });
+    return Promise.resolve();
   }
 
   private render(): void {
