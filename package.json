@@ -4,7 +4,7 @@
   "description": "Obsidian plugin to view source files with syntax highlighting.",
   "private": true,
   "scripts": {
-    "lint": "eslint src",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "build": "tsx esbuild.config.mts production",
     "dev": "tsx esbuild.config.mts",

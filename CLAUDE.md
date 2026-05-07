@@ -7,12 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 npm run build                                      # production bundle → main.js
 npm run dev                                        # esbuild watch mode (inline sourcemaps)
+npm run lint                                       # eslint-plugin-obsidianmd recommended profile
 npm run typecheck                                  # tsc --noEmit, strict
 VAULT_PATH="/path/to/vault" npm run install-to-vault   # copy manifest.json/main.js/styles.css to <vault>/.obsidian/plugins/code-view/
 npm version <patch|minor|major>                    # bump package.json + manifest.json + versions.json, commit, tag (no `v` prefix)
 ```
 
-There is no test suite and no linter wired up. Type errors are the only static check — run `npm run typecheck` before considering work done.
+There is no test suite. Run `npm run lint && npm run typecheck` before considering work done. The linter uses `eslint-plugin-obsidianmd`'s `recommended` profile (`eslint.config.mjs`) and covers all project files including `manifest.json` and `LICENSE`.
 
 `npm version` runs `scripts/version-bump.mts` automatically via the `version` lifecycle hook — it reads the new version from `npm_package_version`, writes it into `manifest.json`, appends an entry to `versions.json` keyed by the new version with the manifest's current `minAppVersion`, then `git add`s both. The plain (no `v`) tag prefix is enforced by `config.tag-version-prefix: ""` in `package.json`, which is what Obsidian's release tooling requires.
 
