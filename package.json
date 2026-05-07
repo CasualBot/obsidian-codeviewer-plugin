@@ -4,6 +4,7 @@
   "description": "Obsidian plugin to view source files with syntax highlighting.",
   "private": true,
   "scripts": {
+    "lint": "eslint src",
     "typecheck": "tsc --noEmit",
     "build": "tsx esbuild.config.mts production",
     "dev": "tsx esbuild.config.mts",
@@ -17,11 +18,17 @@
     "prismjs": "^1.29.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@eslint/json": "^1.2.0",
     "@types/node": "^20.11.0",
     "@types/prismjs": "^1.26.3",
+    "@typescript-eslint/parser": "^8.59.2",
     "esbuild": "^0.25.0",
+    "eslint": "^10.3.0",
+    "eslint-plugin-obsidianmd": "^0.2.9",
     "obsidian": "^1.5.7",
     "tsx": "^4.19.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.2",
+    "typescript-eslint": "^8.59.2"
   }
 }

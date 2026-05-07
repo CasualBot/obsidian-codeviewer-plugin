@@ -241,7 +241,7 @@ export default class CodeViewPlugin extends Plugin {
   }
 
   async loadSettings(): Promise<void> {
-    const loaded: Partial<CodeViewSettings> | null = await this.loadData();
+    const loaded = (await this.loadData()) as Partial<CodeViewSettings> | null;
     this.settings = { ...DEFAULT_SETTINGS, ...(loaded ?? {}) };
   }
 
@@ -292,7 +292,7 @@ class CodeViewSettingTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("File extensions")
       .setDesc(
-        "Comma- or whitespace-separated list of file extensions to open with Code View. Leading dots optional. Reload Obsidian after changing.",
+        "Comma- or whitespace-separated list of file extensions to open with code view. Leading dots optional. Reload Obsidian after changing.",
       )
       .addTextArea((text) => {
         text
@@ -319,7 +319,7 @@ class CodeViewSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("Max file size (KB)")
+      .setName("Max file size (kb)")
       .setDesc(
         "Files above this size show a warning instead of rendering. Prism highlighting is expensive on very large files.",
       )
